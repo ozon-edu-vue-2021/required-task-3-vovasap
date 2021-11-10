@@ -18,14 +18,16 @@
       <div v-if="!isUserOpenned" class="legend">
         <div class="legend__data">
           <div v-if="legend.length > 0" class="legend__items">
-            <LegendItem
-              v-for="(item, index) in legend"
-              :key="index"
-              :color="item.color"
-              :text="item.text"
-              :counter="item.counter"
-              class="legend__item"
-            />
+            <Draggable>
+              <LegendItem
+                v-for="(item, index) in legend"
+                :key="index"
+                :color="item.color"
+                :text="item.text"
+                :counter="item.counter"
+                class="legend__item"
+              />
+            </Draggable>
           </div>
           <span v-else class="legend--empty"> Список пуст </span>
         </div>
@@ -46,6 +48,7 @@
 import LegendItem from "./SideMenu/LegendItem.vue";
 import PersonCard from "./SideMenu/PersonCard.vue";
 import legend from "@/assets/data/legend.json";
+import Draggable from "vuedraggable";
 
 export default {
   props: {
@@ -61,6 +64,7 @@ export default {
   components: {
     LegendItem,
     PersonCard,
+    Draggable,
   },
   data() {
     return {

@@ -2,7 +2,7 @@
   <div class="menu">
     <div class="toolbar">
       <div class="toolbar__header">
-        <template v-if="!isUserOpenned">
+        <template v-if="!isProfileOpened">
           <h3>Информация</h3>
         </template>
         <template v-else>
@@ -15,7 +15,7 @@
       <div class="toolbar__actions"></div>
     </div>
     <div class="content">
-      <div v-if="!isUserOpenned" class="legend">
+      <div v-if="!isProfileOpened" class="legend">
         <div class="legend__data">
           <div v-if="legend.length > 0" class="legend__items">
             <Draggable>
@@ -53,7 +53,7 @@ import { Pie } from "vue-chartjs";
 
 export default {
   props: {
-    isUserOpenned: {
+    isProfileOpened: {
       type: Boolean,
       default: false,
     },
@@ -84,7 +84,7 @@ export default {
       this.legend = legend;
     },
     closeProfile() {
-      this.$emit("update:isUserOpenned", false);
+      this.$emit("update:isProfileOpened", false);
     },
     makeChart() {
       const chartData = {

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="office">
-      <Map />
-      <SideMenu />
+      <Map @selectTable="setPerson" />
+      <SideMenu :person="person" :isProfileOpened.sync="isProfileOpened" />
     </div>
   </div>
 </template>
@@ -10,12 +10,25 @@
 <script>
 import Map from "./components/Map.vue";
 import SideMenu from "./components/SideMenu.vue";
+import people from "@/assets/data/people.json";
 
 export default {
   name: "App",
   components: {
     Map,
     SideMenu,
+  },
+  data() {
+    return {
+      person: null,
+      isProfileOpened: false,
+    };
+  },
+  methods: {
+    setPerson(tableId) {
+      this.person = people.find((person) => person.tableId === tableId);
+      this.isProfileOpened = !!this.person;
+    },
   },
 };
 </script>

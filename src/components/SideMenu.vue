@@ -2,17 +2,13 @@
   <div class="menu">
     <div class="toolbar">
       <div class="toolbar__header">
-        <template v-if="!isProfileOpened">
-          <h3>Информация</h3>
-        </template>
-        <template v-else>
-          <div class="action">
-            <div class="arrow" @click="closeProfile"></div>
+        <h3>Информация</h3>
+        <template v-if="isProfileOpened">
+          <div class="close" @click="closeProfile">
+            <img :src="require('@/assets/icons/close.png')" alt="close" />
           </div>
-          <h3>Профиль</h3>
         </template>
       </div>
-      <div class="toolbar__actions"></div>
     </div>
     <div class="content">
       <div v-if="!isProfileOpened" class="legend">
@@ -124,35 +120,15 @@ export default {
   align-items: center;
 }
 
-.toolbar .toolbar__actions button {
-  font-size: 0.76rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08rem;
-  padding: 2px 6px;
-}
-
 .toolbar__header {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   margin-bottom: 12px;
 }
 
-.toolbar__header .action {
+.toolbar__header .close {
   cursor: pointer;
-  margin-right: 14px;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.toolbar__header .action .arrow {
-  width: 10px;
-  height: 10px;
-  border-top: 2px solid blue;
-  border-right: 2px solid blue;
-  transform: rotate(-135deg);
 }
 
 h3 {

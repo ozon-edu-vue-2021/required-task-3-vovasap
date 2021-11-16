@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="content">
-      <div v-if="!isProfileOpened" class="legend">
+      <div v-show="!isProfileOpened" class="legend">
         <div class="legend__data">
           <div v-if="legend.length > 0" class="legend__items">
             <Draggable>
@@ -31,7 +31,7 @@
           <Pie ref="chart" />
         </div>
       </div>
-      <div v-else class="profile">
+      <div v-if="isProfileOpened" class="profile">
         <div v-if="!person" class="profile__empty">Место пустое</div>
 
         <PersonCard :person="person" />

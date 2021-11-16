@@ -33,8 +33,7 @@
       </div>
       <div v-if="isProfileOpened" class="profile">
         <div v-if="!person" class="profile__empty">Место пустое</div>
-
-        <PersonCard :person="person" />
+        <PersonCard :person="person" v-click-outside="closeProfile" />
       </div>
     </div>
   </div>
@@ -46,6 +45,7 @@ import PersonCard from "./SideMenu/PersonCard.vue";
 import legend from "@/assets/data/legend.json";
 import Draggable from "vuedraggable";
 import { Pie } from "vue-chartjs";
+import clickOutside from '@/directives/clickOutside.js';
 
 export default {
   props: {
@@ -63,6 +63,9 @@ export default {
     PersonCard,
     Draggable,
     Pie,
+  },
+  directives: {
+    clickOutside, 
   },
   data() {
     return {

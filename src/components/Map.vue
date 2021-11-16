@@ -1,5 +1,5 @@
 <template>
-  <div class="map" @click="$emit('selectTable', null)">
+  <div class="map">
     <h3>Карта офиса</h3>
 
     <div v-if="!isLoading" class="map-root">

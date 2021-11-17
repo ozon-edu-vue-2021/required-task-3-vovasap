@@ -14,7 +14,7 @@
       <div v-show="!isProfileOpened" class="legend">
         <div class="legend__data">
           <div v-if="legend.length > 0" class="legend__items">
-            <Draggable>
+            <Draggable @start="draggableStart" @end="draggableEnd">
               <LegendItem
                 v-for="(item, index) in legend"
                 :key="index"
@@ -70,6 +70,8 @@ export default {
   data() {
     return {
       legend: [],
+      chartLegend: [],
+      draggableElement: null,
     };
   },
   created() {
@@ -79,20 +81,30 @@ export default {
     this.makeChart();
   },
   methods: {
+    draggableStart(e) {
+      this.draggableElement = this.chartLegend[e.oldIndex]
+      this.chartLegend.splice(e.oldIndex, 1)
+    },
+    draggableEnd(e) {
+      this.chartLegend.splice(e.newIndex, 0, this.draggableElement)
+      this.draggableElement = null
+      this.makeChart()
+    },
     loadLegend() {
       this.legend = legend;
+      this.chartLegend = JSON.parse(JSON.stringify(legend));
     },
     closeProfile() {
       this.$emit("update:isProfileOpened", false);
     },
     makeChart() {
       const chartData = {
-        labels: this.legend.map((legendItem) => legendItem.text),
+        labels: this.chartLegend.map((legendItem) => legendItem.text),
         datasets: [
           {
             label: "Легенда",
-            backgroundColor: this.legend.map((legendItem) => legendItem.color),
-            data: this.legend.map((legendItem) => legendItem.counter),
+            backgroundColor: this.chartLegend.map((legendItem) => legendItem.color),
+            data: this.chartLegend.map((legendItem) => legendItem.counter),
           },
         ],
       };
